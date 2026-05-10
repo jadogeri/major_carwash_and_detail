@@ -2,8 +2,24 @@
   "namespaces": [],
   "tables": [
     {
-      "name": "user",
+      "name": "users",
       "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
         "email": {
           "name": "email",
           "type": "text",
@@ -70,7 +86,7 @@
           ],
           "composite": false,
           "constraint": true,
-          "keyName": "user_email_unique",
+          "keyName": "users_email_unique",
           "primary": false,
           "unique": true
         }

@@ -7,7 +7,10 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "useDefineForClassFields": false, 
+    "strictPropertyInitialization": false
+
   },
   "include": ["src"]
 }

@@ -1,15 +1,16 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+
 @Entity({ tableName: 'users' }) 
 export class User {
   @PrimaryKey()
-  id!: number;
+  id: number; // No ! and no declare
 
   @Property({ unique: true })
-  email!: string;
+  email: string; // No ! and no declare
 
   @Property({ nullable: true })
   name?: string;
 
   @Property()
-  createdAt = new Date();
+  createdAt: Date = new Date();
 }
