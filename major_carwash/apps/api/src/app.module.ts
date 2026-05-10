@@ -6,9 +6,10 @@ import { OrderModule } from './order/order.module';
 import { BookingModule } from './booking/booking.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { LocationModule } from './location/location.module';
+import { ServiceModule } from './service/service.module';
 
 @Module({
-  imports: [UserModule, OrderModule, BookingModule, VehicleModule, LocationModule],
+  imports: [UserModule, OrderModule, BookingModule, VehicleModule, LocationModule, ServiceModule],
   controllers: [AppController],
   providers: [AppService],
 })
