@@ -7,11 +7,17 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { LocationModule } from './modules/location/location.module';
 import { ServiceModule } from './modules/service/service.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
-
-
+import { MikroOrmModule } from '@mikro-orm/nestjs'
+import { microOrmConfig } from '@repo/database';
 
 @Module({
-  imports: [UserModule, BookingModule, VehicleModule, LocationModule, ServiceModule, ScheduleModule],
+  imports: [MikroOrmModule.forRoot(microOrmConfig), 
+    UserModule, 
+    BookingModule, 
+    VehicleModule, 
+    LocationModule, 
+    ServiceModule, 
+    ScheduleModule],
   controllers: [AppController],
   providers: [AppService],
 })

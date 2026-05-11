@@ -12,10 +12,13 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
+    "rootDir": ".", 
+    "rootDirs": [".", "../../packages/database/src"],
     "outDir": "./dist",
     "paths": {
-      "src/*": ["./src/*"]
-    },    "incremental": true,
+      "src/*": ["./src/*"],
+    },    
+    "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,

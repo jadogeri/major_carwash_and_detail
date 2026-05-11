@@ -9,8 +9,12 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "useDefineForClassFields": false, 
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "declaration": true,      // Required to generate .d.ts files
+    "declarationMap": true,   // Optional: helps with jumping to source
+    "composite": true, // ADD THIS
+    "incremental": true,
 
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
 }

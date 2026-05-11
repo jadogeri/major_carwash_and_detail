@@ -49,6 +49,10 @@ Build a specific project using Turborepo filters:
 ```bash
 turbo build --filter=api
 ```
+Build the database package (Generates dist/ and .d.ts files)
+```bash
+pnpm turbo build --filter=@repo/database
+```
 
 ---
 

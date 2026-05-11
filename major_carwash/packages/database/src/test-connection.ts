@@ -1,5 +1,5 @@
 import { MikroORM } from '@mikro-orm/libsql'; // Ensure this is from @mikro-orm/libsql
-import config from './mikro-orm.config';
+import config from './mikro-orm.config.js';
 
 async function test() {
   try {

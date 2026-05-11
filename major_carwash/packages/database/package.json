@@ -3,11 +3,20 @@
   "author": "Joseph Adogeri",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "dev": "tsc --watch" ,
     "db:debug": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm debug --config src/mikro-orm.config.ts",
     "db:create": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:create --config src/mikro-orm.config.ts",
     "db:up": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:up --config src/mikro-orm.config.ts",

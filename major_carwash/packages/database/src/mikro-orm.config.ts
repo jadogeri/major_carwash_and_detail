@@ -1,14 +1,20 @@
 import 'reflect-metadata'; 
 import * as dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url'; // ADD THIS
+import { dirname } from 'path';     // ADD THIS
 
-// Load from the root of the database package (or adjust path to monorepo root)
+// Define __dirname manually for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Now this line will work correctly
 dotenv.config({ path: path.resolve(__dirname, '../.env') }); 
-import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
 
+import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
 import { Migrator } from '@mikro-orm/migrations';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
-import { User } from './entities/user.entity';
+import { User } from './entities/user.entity.js';
 
 // Hard-coded for immediate testing
 const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || "file:./turso.db";
@@ -16,7 +22,10 @@ const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || "your-turso-auth-token"
 
 console.log("Using Turso Database URL:", TURSO_DATABASE_URL);
 console.log("Using Turso Auth Token:", TURSO_AUTH_TOKEN ? "Provided" : "Not Provided");
+
+
 export default defineConfig({
+
   driver: LibSqlDriver,
   dbName: TURSO_DATABASE_URL,
   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
