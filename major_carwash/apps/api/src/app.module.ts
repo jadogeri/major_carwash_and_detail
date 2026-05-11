@@ -8,6 +8,8 @@ import { LocationModule } from './modules/location/location.module';
 import { ServiceModule } from './modules/service/service.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 
+
+
 @Module({
   imports: [UserModule, BookingModule, VehicleModule, LocationModule, ServiceModule, ScheduleModule],
   controllers: [AppController],

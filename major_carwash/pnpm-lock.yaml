@@ -81,6 +81,15 @@ importers:
 
   apps/api:
     dependencies:
+      '@mikro-orm/core':
+        specifier: ^7.0.15
+        version: 7.0.15
+      '@mikro-orm/libsql':
+        specifier: ^7.0.15
+        version: 7.0.15(@mikro-orm/core@7.0.15)
+      '@mikro-orm/nestjs':
+        specifier: ^7.0.1
+        version: 7.0.1(@mikro-orm/core@7.0.15)(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.19)(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -1097,6 +1106,15 @@ packages:
     engines: {node: '>= 22.17.0'}
     peerDependencies:
       '@mikro-orm/core': 7.0.15
+
+  '@mikro-orm/nestjs@7.0.1':
+    resolution: {integrity: sha512-0VWaGIsVLMI6XDrrblX5om5lyf4msjlRu405jtuUYQ+nULK+XU2gb2mvzo7UvYZd//eEoXtMlkY5oEykm5Hriw==}
+    engines: {node: '>= 22.17.0'}
+    peerDependencies:
+      '@mikro-orm/core': ^7.0.0 || ^7.0.0-dev.0
+      '@nestjs/common': ^11.0.5
+      '@nestjs/core': ^11.0.5
+      reflect-metadata: ^0.1.0 || ^0.2.0
 
   '@mikro-orm/reflection@7.0.15':
     resolution: {integrity: sha512-tbGzQYpu0cB4ah+w9yCfqjFjS4XW9qvXGncjLklh0kr0G1Vg3lg5ocgnGk+FqXWnW/t4NbDzZhokKDvv3ss+Yw==}
@@ -5799,6 +5817,13 @@ snapshots:
     dependencies:
       '@mikro-orm/core': 7.0.15
       '@mikro-orm/sql': 7.0.15(@mikro-orm/core@7.0.15)
+
+  '@mikro-orm/nestjs@7.0.1(@mikro-orm/core@7.0.15)(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.19)(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)':
+    dependencies:
+      '@mikro-orm/core': 7.0.15
+      '@nestjs/common': 11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/core': 11.1.19(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.19)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      reflect-metadata: 0.2.2
 
   '@mikro-orm/reflection@7.0.15(@mikro-orm/core@7.0.15)':
     dependencies:
