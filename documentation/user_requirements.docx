@@ -1,0 +1,37 @@
+## User Requirements
+The user requirements have been categorized based on the system functions they describe:
+User Core Identity and Dependencies
+
+* Each User must have exactly one Profile, which is existence-dependent on the User.
+* A User must be able to have zero or more Contact methods, which are also existence-dependent on the User.
+* Each User must own at least one Vehicle to maintain an active account status.
+
+Vehicle and Booking Management
+
+* The system must allow a User to own and manage one or more Vehicles.
+* The system must ensure every Booking is associated with exactly one User and exactly one specific Vehicle.
+* The system must allow a User or Vehicle to exist in the system without any past or future Bookings.
+
+Location and Service Operations
+
+* Each Booking must be hosted at exactly one Location.
+* Each Location must manage one or more Schedule slots to be available for service.
+* A Booking must consist of one or more Services (e.g., Basic Wash, Wax, Interior).
+* The system must allow Services to exist in the catalog even if they have not been assigned to any Bookings.
+
+Authentication and Session Management
+
+* The system must ensure that every User has exactly one associated Auth record for credentials, and vice versa.
+* The system must allow between one and five active Sessions for a given Auth record at any time.
+* The system must allow an Auth record to exist without any active Sessions.
+
+Role-Based Access Control (RBAC)
+
+* The system must support many-to-many relationships between Users and Roles, and Roles and Permissions.
+* The system must not allow a User to exist without a Role assigned.
+* The system must allow a Role to exist without a User assigned.
+* The system must allow a Role to exist without any Permissions granted.
+* The system must allow a Permission to exist without being assigned to a Role.
+
+Would you like to move on to creating the TypeORM entity code for these updated requirements?
+
