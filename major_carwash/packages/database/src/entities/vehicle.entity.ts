@@ -1,11 +1,11 @@
 import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany } from '@mikro-orm/decorators/legacy';
-import type { Booking } from './booking.entity.js';
-import type { User } from './user.entity.js';
+import type { BookingEntity as Booking } from './booking.entity.js';
+import type { UserEntity as User } from './user.entity.js';
 import { Collection } from '@mikro-orm/core';
 
 
 @Entity({ tableName: 'vehicles' })
-export class Vehicle {
+export class VehicleEntity {
   @PrimaryKey({type: 'number'})
   id: number;
 

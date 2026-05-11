@@ -3,14 +3,14 @@ import { Collection } from "@mikro-orm/core";
 import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany } from "@mikro-orm/decorators/legacy";
 
 // 1. MUST use 'import type' for all related entities
-import type { User } from './user.entity.js';
-import type { Vehicle } from './vehicle.entity.js';
-import type { Location } from './location.entity.js';
-import type { Service } from './service.entity.js';
-import type { Schedule } from './schedule.entity.js';
+import type { UserEntity as User } from './user.entity.js';
+import type { VehicleEntity as Vehicle } from './vehicle.entity.js';
+import type { LocationEntity as Location } from './location.entity.js';
+import type { ServiceEntity as Service } from './service.entity.js';
+import type { ScheduleEntity as Schedule } from './schedule.entity.js';
 
 @Entity({ tableName: 'bookings' })
-export class Booking {
+export class BookingEntity {
   @PrimaryKey({type: 'number'})
   id: number;
 

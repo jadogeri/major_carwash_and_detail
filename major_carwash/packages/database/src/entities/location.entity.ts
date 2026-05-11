@@ -2,11 +2,11 @@ import { Collection } from "@mikro-orm/core";
 import { Entity, PrimaryKey, Property, OneToMany } from "@mikro-orm/decorators/legacy";
 
 // 1. MUST use 'import type' to prevent metadata crashes
-import type { Booking } from "./booking.entity.js";
-import type { Schedule } from "./schedule.entity.js";
+import type { BookingEntity as Booking } from "./booking.entity.js";
+import type { ScheduleEntity as Schedule } from "./schedule.entity.js";
 
 @Entity({ tableName: 'locations' })
-export class Location {
+export class LocationEntity {
   @PrimaryKey({type: 'number'})
   id: number;
 

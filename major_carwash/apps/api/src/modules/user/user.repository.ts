@@ -8,7 +8,5 @@ import { EntityManager } from '@mikro-orm/core';
 export class UserRepository extends BaseRepository<User> {
     constructor(em: EntityManager) {
         super(em, User);
-    }
-
-    
+    }    
 }

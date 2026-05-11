@@ -3,11 +3,11 @@ import { Collection } from '@mikro-orm/core';
 import { Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/decorators/legacy';
 
 // 1. MUST use 'import type' to stop TypeScript from emitting metadata for these classes
-import type { Booking } from './booking.entity.js';
-import type { Vehicle } from './vehicle.entity.js';
+import type { BookingEntity as Booking } from './booking.entity.js';
+import type { VehicleEntity as Vehicle } from './vehicle.entity.js';
 
 @Entity({ tableName: 'users' }) 
-export class User {
+export class UserEntity {
   @PrimaryKey({type: 'number'})
   id: number;
 

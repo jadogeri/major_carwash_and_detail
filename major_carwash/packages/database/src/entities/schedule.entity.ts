@@ -1,10 +1,10 @@
 import { Collection } from "@mikro-orm/core";
 import { Entity, PrimaryKey, Property, ManyToOne, OneToMany } from "@mikro-orm/decorators/legacy";
-import type { Booking } from "./booking.entity.js";
-import type { Location } from './location.entity.js'; 
+import type { BookingEntity as Booking } from "./booking.entity.js";
+import type { LocationEntity as Location } from './location.entity.js'; 
 
 @Entity({ tableName: 'schedules' })
-export class Schedule {
+export class ScheduleEntity {
   @PrimaryKey({type: 'number'})
   id: number;
 
