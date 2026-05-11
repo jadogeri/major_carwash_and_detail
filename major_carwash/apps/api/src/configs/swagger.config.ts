@@ -13,7 +13,7 @@ export const swaggerConfig = new DocumentBuilder()
   .setContact('Carwash Support', 'https://majorcarwash.com', 'support@majorcarwash.com')
   .setTermsOfService('https://majorcarwash.com')
   .setExternalDoc('Technical Documentation', 'https://majorcarwash.com')
-  .addServer('http://localhost:3000/api', "Local development server")
+  .addServer('http://localhost:3002/api', "Local development server")
   .addServer('https://majorcarwash.com', "Production server")
   // Resource Tags
   .addTag('User', 'User accounts and profile management')

@@ -1,4 +1,4 @@
-// src/modules/user/user.controller.ts
+// apps/api/src/modules/user/user.controller.ts
 import { 
   Controller, 
   Get, 
@@ -10,12 +10,10 @@ import {
   ParseIntPipe 
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import * as Db from '@repo/database';
-import * as Mikro from '@mikro-orm/core';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('users')
+@Controller('users') // Changed to 'users' to match typical Nest conventions
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

@@ -1,26 +1,31 @@
-// src/modules/user/user.service.ts
+// apps/api/src/modules/user/user.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserRepository } from './user.repository';
-// 1. Use a namespace import for the shared package
+import { InjectRepository } from '@mikro-orm/nestjs';
 import * as Db from '@repo/database'; 
-// 2. Use a namespace import for MikroORM core types
-import * as Mikro from '@mikro-orm/core';
+import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    // This token must match the one provided in UserModule
+    @InjectRepository(Db.User)
+    private readonly userRepository: UserRepository
+  ) {}
 
- async create(data: CreateUserDto) {
+  async create(data: CreateUserDto) {
+    // .createEntity() comes from your BaseRepository
     return await this.userRepository.createEntity(data);
   }
 
   async findAll() {
+    // .search() comes from your BaseRepository
     return await this.userRepository.search();
   }
 
   async findOne(id: number) {
+    // id: any is accepted by MikroORM findOne/findById
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException(`User with ID ${id} not found`);
     return user;
