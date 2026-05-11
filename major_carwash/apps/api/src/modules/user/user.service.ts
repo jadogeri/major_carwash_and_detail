@@ -10,7 +10,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserService {
   constructor(
     // This token must match the one provided in UserModule
-    @InjectRepository(Db.User)
+    @InjectRepository(Db.UserEntity)
     private readonly userRepository: UserRepository
   ) {}
 

@@ -1,9 +1,9 @@
 // src/modules/user/dto/create-user.dto.ts
-import { User } from '@repo/database';
+import { UserEntity } from '@repo/database';
 import type { RawQueryFragment, RequiredEntityData } from '@mikro-orm/core';
 
 // This is a class, so it works as a runtime value!
-export class CreateUserDto implements RequiredEntityData<User> {
+export class CreateUserDto implements RequiredEntityData<UserEntity> {
   createdAt!: string | Date | RawQueryFragment<string>;
   id?: number | RawQueryFragment<string> | null | undefined;
   email!: string;
