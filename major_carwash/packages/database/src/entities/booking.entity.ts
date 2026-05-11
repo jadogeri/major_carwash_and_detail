@@ -1,35 +1,36 @@
-import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany, Collection } from '@mikro-orm/decorators/legacy';
-import { User } from './user.entity';
-import { Vehicle } from './vehicle.entity';
-import { Location } from './location.entity';
-import { Service } from './service.entity';
-import { Schedule } from './schedule.entity';
+// packages/database/src/entities/booking.entity.ts
+import { Collection } from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany } from "@mikro-orm/decorators/legacy";
+
+// 1. MUST use 'import type' for all related entities
+import type { User } from './user.entity.js';
+import type { Vehicle } from './vehicle.entity.js';
+import type { Location } from './location.entity.js';
+import type { Service } from './service.entity.js';
+import type { Schedule } from './schedule.entity.js';
 
 @Entity({ tableName: 'bookings' })
 export class Booking {
-  @PrimaryKey()
+  @PrimaryKey({type: 'number'})
   id: number;
 
-  @Property()
+  @Property({ type: 'date' })
   bookingDate: Date;
 
-  // Many Bookings -> Exactly One User (1..1)
-  @ManyToOne(() => User)
+  // 2. Use () => 'ClassName' as any to satisfy legacy decorators 
+  // and prevent metadata generation for the 'User' class
+  @ManyToOne(() => 'User' as any)
   user: User;
 
-  // Many Bookings -> Exactly One Location (1..1)
-  @ManyToOne(() => Location)
+  @ManyToOne(() => 'Location' as any)
   location: Location;
 
-  // Many Bookings -> Exactly One Slot (0..1)
-  @ManyToOne(() => Schedule, { nullable: true })
+  @ManyToOne(() => 'Schedule' as any, { nullable: true })
   slot?: Schedule;
 
-  // One or More Bookings -> One or More Vehicles (1..*)
-  @ManyToMany(() => Vehicle, 'bookings', { owner: true })
+  @ManyToMany(() => 'Vehicle' as any, 'bookings', { owner: true })
   vehicles = new Collection<Vehicle>(this);
 
-  // One or More Bookings -> One or More Services (1..*)
-  @ManyToMany(() => Service, 'bookings', { owner: true })
+  @ManyToMany(() => 'Service' as any, 'bookings', { owner: true })
   services = new Collection<Service>(this);
 }

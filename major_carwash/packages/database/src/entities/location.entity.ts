@@ -1,23 +1,27 @@
-import { Entity, PrimaryKey, Property, OneToMany, Collection } from '@mikro-orm/decorators/legacy';
-import { Booking } from './booking.entity';
-import { Schedule } from './schedule.entity';
+import { Collection } from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property, OneToMany } from "@mikro-orm/decorators/legacy";
+
+// 1. MUST use 'import type' to prevent metadata crashes
+import type { Booking } from "./booking.entity.js";
+import type { Schedule } from "./schedule.entity.js";
 
 @Entity({ tableName: 'locations' })
 export class Location {
-  @PrimaryKey()
+  @PrimaryKey({type: 'number'})
   id: number;
 
-  @Property()
+  @Property({ type: 'string' })
   name: string;
 
-  @Property()
+  @Property({ type: 'string' })
   address: string;
 
-  // One Location -> Zero or More Bookings (0..*)
-  @OneToMany(() => Booking, booking => booking.location)
+  // 2. Use () => 'Booking' as any to satisfy legacy decorators
+  // This avoids referencing the Booking class at runtime
+  @OneToMany(() => 'Booking' as any, (booking: Booking) => booking.location)
   bookings = new Collection<Booking>(this);
 
-  // One Location -> One or More Slots (1..*)
-  @OneToMany(() => Schedule, schedule => schedule.location)
+  // 3. Use () => 'Schedule' as any
+  @OneToMany(() => 'Schedule' as any, (schedule: Schedule) => schedule.location)
   schedules = new Collection<Schedule>(this);
 }

@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
-   "exports": {
+  "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
@@ -16,7 +16,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "dev": "tsc --watch" ,
+    "dev": "tsc --watch",
     "db:debug": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm debug --config src/mikro-orm.config.ts",
     "db:create": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:create --config src/mikro-orm.config.ts",
     "db:up": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:up --config src/mikro-orm.config.ts",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@mikro-orm/cli": "^7.0.15",
-    "@mikro-orm/migrations": "^7.0.15"
+    "@mikro-orm/migrations": "^7.0.15",
+    "tsx": "^4.21.0"
   }
 }

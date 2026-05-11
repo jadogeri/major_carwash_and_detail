@@ -14,11 +14,11 @@
     "db:push": "pnpm --filter @repo/database exec mikro-orm schema:update --run",
     "db:migrate": "pnpm --filter @repo/database exec mikro-orm migration:up",
     "db:debug": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm debug --config src/mikro-orm.config.ts",
-    "db:create": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:create --config src/mikro-orm.config.ts",
-    "db:up": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:up --config src/mikro-orm.config.ts",
-    "db:down": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:down --config src/mikro-orm.config.ts",
-    "db:fresh": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:fresh --config src/mikro-orm.config.ts",
-    "db:sync": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm schema:update --run --config src/mikro-orm.config.ts"
+    "db:create": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true MIKRO_ORM_CLI_TS_LOADER=tsx mikro-orm migration:create --config src/mikro-orm.config.ts",
+    "db:up": "pnpm --filter @repo/database exec cross-env MIKRO_ORM_CLI_PREFER_TS=true MIKRO_ORM_CLI_TS_LOADER=tsx mikro-orm migration:up --config src/mikro-orm.config.ts",
+    "db:down": "pnpm --filter @repo/database exec cross-env NODE_OPTIONS=\"--loader ts-node/esm --no-warnings\" MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:down --config src/mikro-orm.config.ts",
+    "db:fresh": "pnpm --filter @repo/database exec cross-env NODE_OPTIONS=\"--loader ts-node/esm --no-warnings\" MIKRO_ORM_CLI_PREFER_TS=true mikro-orm migration:fresh --config src/mikro-orm.config.ts",
+    "db:sync": "pnpm --filter @repo/database exec cross-env NODE_OPTIONS=\"--loader ts-node/esm --no-warnings\" MIKRO_ORM_CLI_PREFER_TS=true mikro-orm schema:update --run --config src/mikro-orm.config.ts"
   },
   "devDependencies": {
     "cross-env": "^10.1.0",

@@ -1,18 +1,21 @@
-import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/decorators/legacy';
-import { Booking } from './booking.entity';
+import { Collection } from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property, ManyToMany } from "@mikro-orm/decorators/legacy";
+// 1. MUST use 'import type' for the related entity
+import type { Booking } from "./booking.entity.js";
 
 @Entity({ tableName: 'services' })
 export class Service {
-  @PrimaryKey()
+  @PrimaryKey({type: 'number'})
   id: number;
 
-  @Property()
+  @Property({ type: 'string' })
   name: string;
 
-  @Property()
+  @Property({ type: 'number' })
   price: number;
 
-  // One or More Services -> One or More Bookings (1..*)
-  @ManyToMany(() => Booking, booking => booking.services)
+  // 2. Use () => 'Booking' as any to satisfy the legacy decorator 
+  // and prevent the 'design:type' metadata from referencing the Class directly.
+  @ManyToMany(() => 'Booking' as any, (booking: Booking) => booking.services)
   bookings = new Collection<Booking>(this);
 }
