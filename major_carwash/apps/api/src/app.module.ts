@@ -7,19 +7,21 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { LocationModule } from './modules/location/location.module';
 import { ServiceModule } from './modules/service/service.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
-import { MikroOrmModule } from '@mikro-orm/nestjs'
-import { microOrmConfig } from '@repo/database';
+// 1. Remove MikroOrmModule and microOrmConfig imports here
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
 
 @Module({
-  imports: [MikroOrmModule.forRoot(microOrmConfig), 
+  imports: [
+    // 2. ONLY import InfrastructureModule. 
+    // It already contains DatabaseModule which calls forRoot().
+    InfrastructureModule, 
+    
     UserModule, 
     BookingModule, 
     VehicleModule, 
     LocationModule, 
     ServiceModule, 
     ScheduleModule,
-    InfrastructureModule
   ],
   controllers: [AppController],
   providers: [AppService],

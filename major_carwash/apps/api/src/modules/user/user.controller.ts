@@ -10,38 +10,40 @@ import {
   ParseIntPipe 
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from '@repo/database';
-import type { RequiredEntityData } from '@mikro-orm/core';
+import * as Db from '@repo/database';
+import * as Mikro from '@mikro-orm/core';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() userData: RequiredEntityData<User>) {
-    return this.userService.create(userData);
+  async create(@Body() userData: CreateUserDto) {
+    return await this.userService.create(userData);
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    return await this.userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.userService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number, 
-    @Body() updateData: Partial<User>
+    @Body() updateData: UpdateUserDto
   ) {
-    return this.userService.update(id, updateData);
+    return await this.userService.update(id, updateData);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.userService.remove(id);
   }
 }

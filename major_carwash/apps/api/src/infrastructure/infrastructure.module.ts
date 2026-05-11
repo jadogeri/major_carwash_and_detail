@@ -2,9 +2,8 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 
-
 @Module({
   imports: [DatabaseModule],
-  exports: [DatabaseModule], // Exporting them makes them available to AppModule
+  // No need to export anything; DatabaseModule is already Global
 })
 export class InfrastructureModule {}
