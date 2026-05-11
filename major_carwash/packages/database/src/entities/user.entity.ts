@@ -2,7 +2,7 @@
 import { Collection } from '@mikro-orm/core';
 import { Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/decorators/legacy';
 
-// 1. MUST use 'import type' to stop TypeScript from emitting metadata for these classes
+// 1. Keep 'import type' to avoid circular dependency issues
 import type { BookingEntity as Booking } from './booking.entity.js';
 import type { VehicleEntity as Vehicle } from './vehicle.entity.js';
 
@@ -20,12 +20,11 @@ export class UserEntity {
   @Property({ type: 'date' })
   createdAt: Date = new Date();
 
-  // 2. Use () => 'Vehicle' as any 
-  // This satisfies the decorator but prevents the 'Vehicle' class from being accessed at load time
-  @OneToMany(() => 'Vehicle' as any, (vehicle: Vehicle) => vehicle.owner)
+  // FIX: Change 'Vehicle' to 'VehicleEntity' to match the discovered class name
+  @OneToMany(() => 'VehicleEntity' as any, (vehicle: Vehicle) => vehicle.owner)
   vehicles = new Collection<Vehicle>(this);
 
-  // 3. Use () => 'Booking' as any
-  @OneToMany(() => 'Booking' as any, (booking: Booking) => booking.user)
+  // FIX: Change 'Booking' to 'BookingEntity'
+  @OneToMany(() => 'BookingEntity' as any, (booking: Booking) => booking.user)
   bookings = new Collection<Booking>(this);
 }

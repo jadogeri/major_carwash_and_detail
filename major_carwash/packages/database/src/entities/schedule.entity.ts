@@ -1,3 +1,4 @@
+// packages/database/src/entities/schedule.entity.ts
 import { Collection } from "@mikro-orm/core";
 import { Entity, PrimaryKey, Property, ManyToOne, OneToMany } from "@mikro-orm/decorators/legacy";
 import type { BookingEntity as Booking } from "./booking.entity.js";
@@ -14,13 +15,11 @@ export class ScheduleEntity {
   @Property({ type: 'date' })
   endTime: Date;
 
-  // FIX: Return the string 'Location' from the function.
-  // 1. It satisfies the "Function" type check.
-  // 2. It avoids referencing the 'Location' class/global at runtime.
-  @ManyToOne(() => 'Location' as any)
+  // FIX: Change 'Location' to 'LocationEntity' to match your class name
+  @ManyToOne(() => 'LocationEntity' as any)
   location: Location;
 
-  // FIX: Same pattern for Booking
-  @OneToMany(() => 'Booking' as any, (booking: Booking) => booking.slot)
+  // FIX: Change 'Booking' to 'BookingEntity'
+  @OneToMany(() => 'BookingEntity' as any, (booking: Booking) => booking.slot)
   bookings = new Collection<Booking>(this);
 }
