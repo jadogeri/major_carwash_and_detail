@@ -15,6 +15,11 @@ import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
 import { Migrator } from '@mikro-orm/migrations';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 import { User } from './entities/user.entity.js';
+import { Service } from './entities/service.entity.js';
+import { Booking } from './entities/booking.entity.js';
+import { Vehicle } from './entities/vehicle.entity.js';
+import { Schedule } from './entities/schedule.entity.js';
+import { Location } from './entities/location.entity.js';
 
 // Hard-coded for immediate testing
 const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || "file:./turso.db";
@@ -30,7 +35,7 @@ export default defineConfig({
   dbName: TURSO_DATABASE_URL,
   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
   
-  entities: [User], // Using classes directly prevents path discovery errors
+  entities: [User, Vehicle, Booking, Service, Schedule, Location], // Using classes directly prevents path discovery errors
   metadataProvider: ReflectMetadataProvider,
   
     // 3. Monorepo Discovery Fix
@@ -49,6 +54,8 @@ export default defineConfig({
         glob: '!(*.d).{js,ts}',
         transactional: true,
         allOrNothing: true,
+        snapshot: true,
+        emit: 'ts',
     },
 
     // 6. Logging

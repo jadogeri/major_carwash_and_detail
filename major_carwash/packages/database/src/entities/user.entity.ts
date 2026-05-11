@@ -1,16 +1,31 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+// packages/database/src/entities/user.entity.ts
+import { Collection } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/decorators/legacy';
+
+// 1. MUST use 'import type' to stop TypeScript from emitting metadata for these classes
+import type { Booking } from './booking.entity.js';
+import type { Vehicle } from './vehicle.entity.js';
 
 @Entity({ tableName: 'users' }) 
 export class User {
-  @PrimaryKey()
-  id: number; // No ! and no declare
+  @PrimaryKey({type: 'number'})
+  id: number;
 
-  @Property({ unique: true })
-  email: string; // No ! and no declare
+  @Property({ unique: true, type: 'string' })
+  email: string;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, type: 'string' })
   name?: string;
 
-  @Property()
+  @Property({ type: 'date' })
   createdAt: Date = new Date();
+
+  // 2. Use () => 'Vehicle' as any 
+  // This satisfies the decorator but prevents the 'Vehicle' class from being accessed at load time
+  @OneToMany(() => 'Vehicle' as any, (vehicle: Vehicle) => vehicle.owner)
+  vehicles = new Collection<Vehicle>(this);
+
+  // 3. Use () => 'Booking' as any
+  @OneToMany(() => 'Booking' as any, (booking: Booking) => booking.user)
+  bookings = new Collection<Booking>(this);
 }
