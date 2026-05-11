@@ -9,6 +9,7 @@ import { ServiceModule } from './modules/service/service.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs'
 import { microOrmConfig } from '@repo/database';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
 
 @Module({
   imports: [MikroOrmModule.forRoot(microOrmConfig), 
@@ -17,7 +18,9 @@ import { microOrmConfig } from '@repo/database';
     VehicleModule, 
     LocationModule, 
     ServiceModule, 
-    ScheduleModule],
+    ScheduleModule,
+    InfrastructureModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
