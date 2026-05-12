@@ -1,26 +1,43 @@
-import { Injectable } from '@nestjs/common';
+// apps/api/src/modules/service/service.service.ts
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { ServiceEntity } from '@repo/database';
+import { ServiceRepository } from './service.repository';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Injectable()
 export class ServiceService {
-  create(createServiceDto: CreateServiceDto) {
-    return 'This action adds a new service';
+  constructor(
+    @InjectRepository(ServiceEntity)
+    private readonly serviceRepository: ServiceRepository
+  ) {}
+
+  async create(data: CreateServiceDto) {
+    return await this.serviceRepository.createEntity(data);
   }
 
-  findAll() {
-    return `This action returns all service`;
+  async findAll() {
+    return await this.serviceRepository.search();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} service`;
+  async findOne(id: number) {
+    const service = await this.serviceRepository.findById(id);
+    if (!service) throw new NotFoundException(`Service with ID ${id} not found`);
+    return service;
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return `This action updates a #${id} service`;
+  async update(id: number, data: UpdateServiceDto) {
+    const service = await this.serviceRepository.update(id, data);
+    if (!service) throw new NotFoundException(`Service with ID ${id} not found`);
+    return service;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} service`;
+  async remove(id: number) {
+    const service = await this.serviceRepository.findById(id);
+    if (!service) throw new NotFoundException(`Service with ID ${id} not found`);
+    
+    await this.serviceRepository.deleteEntity(id);
+    return { deleted: true };
   }
 }

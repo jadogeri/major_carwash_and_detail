@@ -1,26 +1,43 @@
-import { Injectable } from '@nestjs/common';
+// apps/api/src/modules/vehicle/vehicle.service.ts
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { VehicleEntity } from '@repo/database';
+import { VehicleRepository } from './vehicle.repository';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 
 @Injectable()
 export class VehicleService {
-  create(createVehicleDto: CreateVehicleDto) {
-    return 'This action adds a new vehicle';
+  constructor(
+    @InjectRepository(VehicleEntity)
+    private readonly vehicleRepository: VehicleRepository
+  ) {}
+
+  async create(data: CreateVehicleDto) {
+    return await this.vehicleRepository.createEntity(data);
   }
 
-  findAll() {
-    return `This action returns all vehicle`;
+  async findAll() {
+    return await this.vehicleRepository.search();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} vehicle`;
+  async findOne(id: number) {
+    const vehicle = await this.vehicleRepository.findById(id);
+    if (!vehicle) throw new NotFoundException(`Vehicle with ID ${id} not found`);
+    return vehicle;
   }
 
-  update(id: number, updateVehicleDto: UpdateVehicleDto) {
-    return `This action updates a #${id} vehicle`;
+  async update(id: number, data: UpdateVehicleDto) {
+    const vehicle = await this.vehicleRepository.update(id, data);
+    if (!vehicle) throw new NotFoundException(`Vehicle with ID ${id} not found`);
+    return vehicle;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} vehicle`;
+  async remove(id: number) {
+    const vehicle = await this.vehicleRepository.findById(id);
+    if (!vehicle) throw new NotFoundException(`Vehicle with ID ${id} not found`);
+    
+    await this.vehicleRepository.deleteEntity(id);
+    return { deleted: true };
   }
 }
