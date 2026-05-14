@@ -319,8 +319,8 @@
           "enumItems": [],
           "mappedType": "integer"
         },
-        "user_id": {
-          "name": "user_id",
+        "userId": {
+          "name": "userId",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -359,11 +359,11 @@
         },
         {
           "columnNames": [
-            "user_id"
+            "userId"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "bookings_user_id_index",
+          "keyName": "bookings_userId_index",
           "primary": false,
           "unique": false
         },
@@ -403,16 +403,17 @@
           "referencedTableName": "schedules",
           "deleteRule": "set null"
         },
-        "bookings_user_id_foreign": {
+        "bookings_userId_foreign": {
           "columnNames": [
-            "user_id"
+            "userId"
           ],
-          "constraintName": "bookings_user_id_foreign",
+          "constraintName": "bookings_userId_foreign",
           "localTableName": "bookings",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "users"
+          "referencedTableName": "users",
+          "deleteRule": "cascade"
         }
       },
       "comment": null
@@ -1129,7 +1130,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "unique": false,
           "length": null,
           "precision": null,

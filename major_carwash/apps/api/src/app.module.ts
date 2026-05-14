@@ -9,6 +9,7 @@ import { ServiceModule } from './modules/service/service.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 // 1. Remove MikroOrmModule and microOrmConfig imports here
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
     VehicleModule, 
     LocationModule, 
     ServiceModule, 
-    ScheduleModule,
+    ScheduleModule, AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

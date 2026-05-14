@@ -1,15 +1,21 @@
+// packages/database/src/mikro-orm.config.ts
 import 'reflect-metadata'; 
 import * as dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url'; // ADD THIS
-import { dirname } from 'path';     // ADD THIS
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-// Define __dirname manually for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Now this line will work correctly
+// 1. Try loading from the monorepo workspace ROOT directory first
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') }); 
+
+// 2. Fallback to the local package folder if present
 dotenv.config({ path: path.resolve(__dirname, '../.env') }); 
+
+// 3. Fallback to the working process location (covers NestJS execution context)
+dotenv.config();
 
 import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
 import { Migrator } from '@mikro-orm/migrations';

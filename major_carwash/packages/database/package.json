@@ -15,6 +15,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "node -e \"try { require('fs').unlinkSync('tsconfig.tsbuildinfo') } catch (e) {}\"",
     "build": "tsc",
     "dev": "tsc --watch",
     "db:debug": "cross-env MIKRO_ORM_CLI_PREFER_TS=true mikro-orm debug --config src/mikro-orm.config.ts",
