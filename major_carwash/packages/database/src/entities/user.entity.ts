@@ -12,11 +12,12 @@ export class UserEntity {
   @PrimaryKey({ type: 'string' })
   id!: string;
 
+  @Property({ type: 'string', nullable: true }) // Add nullable: true
+  name?: string; // Change !: to ?:
+
   @Property({ unique: true, type: 'string' })
   email!: string;
 
-  @Property({ type: 'string' })
-  name!: string;
 
   @Property({ type: 'boolean', default: false })
   emailVerified!: boolean;

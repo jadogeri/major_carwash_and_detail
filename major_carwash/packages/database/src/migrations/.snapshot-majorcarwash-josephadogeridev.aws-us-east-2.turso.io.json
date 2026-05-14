@@ -2,6 +2,257 @@
   "namespaces": [],
   "tables": [
     {
+      "name": "accounts",
+      "columns": {
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "userId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "accounts_userId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "primary",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "accounts_userId_foreign": {
+          "columnNames": [
+            "userId"
+          ],
+          "constraintName": "accounts_userId_foreign",
+          "localTableName": "accounts",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "users",
+          "deleteRule": "cascade"
+        }
+      },
+      "comment": null
+    },
+    {
       "name": "bookings",
       "columns": {
         "booking_date": {
@@ -70,7 +321,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "text",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -82,7 +333,7 @@
           "default": null,
           "comment": null,
           "enumItems": [],
-          "mappedType": "integer"
+          "mappedType": "text"
         }
       },
       "indexes": [
@@ -169,8 +420,8 @@
     {
       "name": "bookings_services",
       "columns": {
-        "booking_id": {
-          "name": "booking_id",
+        "booking_entity_id": {
+          "name": "booking_entity_id",
           "type": "integer",
           "unsigned": false,
           "autoincrement": false,
@@ -185,8 +436,8 @@
           "enumItems": [],
           "mappedType": "integer"
         },
-        "service_id": {
-          "name": "service_id",
+        "service_entity_id": {
+          "name": "service_entity_id",
           "type": "integer",
           "unsigned": false,
           "autoincrement": false,
@@ -205,28 +456,28 @@
       "indexes": [
         {
           "columnNames": [
-            "booking_id"
+            "booking_entity_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "bookings_services_booking_id_index",
+          "keyName": "bookings_services_booking_entity_id_index",
           "primary": false,
           "unique": false
         },
         {
           "columnNames": [
-            "service_id"
+            "service_entity_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "bookings_services_service_id_index",
+          "keyName": "bookings_services_service_entity_id_index",
           "primary": false,
           "unique": false
         },
         {
           "columnNames": [
-            "booking_id",
-            "service_id"
+            "booking_entity_id",
+            "service_entity_id"
           ],
           "composite": true,
           "constraint": true,
@@ -237,11 +488,11 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "bookings_services_booking_id_foreign": {
+        "bookings_services_booking_entity_id_foreign": {
           "columnNames": [
-            "booking_id"
+            "booking_entity_id"
           ],
-          "constraintName": "bookings_services_booking_id_foreign",
+          "constraintName": "bookings_services_booking_entity_id_foreign",
           "localTableName": "bookings_services",
           "referencedColumnNames": [
             "id"
@@ -250,11 +501,11 @@
           "updateRule": "cascade",
           "deleteRule": "cascade"
         },
-        "bookings_services_service_id_foreign": {
+        "bookings_services_service_entity_id_foreign": {
           "columnNames": [
-            "service_id"
+            "service_entity_id"
           ],
-          "constraintName": "bookings_services_service_id_foreign",
+          "constraintName": "bookings_services_service_entity_id_foreign",
           "localTableName": "bookings_services",
           "referencedColumnNames": [
             "id"
@@ -269,8 +520,8 @@
     {
       "name": "bookings_vehicles",
       "columns": {
-        "booking_id": {
-          "name": "booking_id",
+        "booking_entity_id": {
+          "name": "booking_entity_id",
           "type": "integer",
           "unsigned": false,
           "autoincrement": false,
@@ -285,8 +536,8 @@
           "enumItems": [],
           "mappedType": "integer"
         },
-        "vehicle_id": {
-          "name": "vehicle_id",
+        "vehicle_entity_id": {
+          "name": "vehicle_entity_id",
           "type": "integer",
           "unsigned": false,
           "autoincrement": false,
@@ -305,28 +556,28 @@
       "indexes": [
         {
           "columnNames": [
-            "booking_id"
+            "booking_entity_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "bookings_vehicles_booking_id_index",
+          "keyName": "bookings_vehicles_booking_entity_id_index",
           "primary": false,
           "unique": false
         },
         {
           "columnNames": [
-            "vehicle_id"
+            "vehicle_entity_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "bookings_vehicles_vehicle_id_index",
+          "keyName": "bookings_vehicles_vehicle_entity_id_index",
           "primary": false,
           "unique": false
         },
         {
           "columnNames": [
-            "booking_id",
-            "vehicle_id"
+            "booking_entity_id",
+            "vehicle_entity_id"
           ],
           "composite": true,
           "constraint": true,
@@ -337,11 +588,11 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "bookings_vehicles_booking_id_foreign": {
+        "bookings_vehicles_booking_entity_id_foreign": {
           "columnNames": [
-            "booking_id"
+            "booking_entity_id"
           ],
-          "constraintName": "bookings_vehicles_booking_id_foreign",
+          "constraintName": "bookings_vehicles_booking_entity_id_foreign",
           "localTableName": "bookings_vehicles",
           "referencedColumnNames": [
             "id"
@@ -350,11 +601,11 @@
           "updateRule": "cascade",
           "deleteRule": "cascade"
         },
-        "bookings_vehicles_vehicle_id_foreign": {
+        "bookings_vehicles_vehicle_entity_id_foreign": {
           "columnNames": [
-            "vehicle_id"
+            "vehicle_entity_id"
           ],
-          "constraintName": "bookings_vehicles_vehicle_id_foreign",
+          "constraintName": "bookings_vehicles_vehicle_entity_id_foreign",
           "localTableName": "bookings_vehicles",
           "referencedColumnNames": [
             "id"
@@ -609,6 +860,187 @@
       "comment": null
     },
     {
+      "name": "sessions",
+      "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "primary",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "token"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "sessions_token_unique",
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "userId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "sessions_userId_index",
+          "primary": false,
+          "unique": false
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "sessions_userId_foreign": {
+          "columnNames": [
+            "userId"
+          ],
+          "constraintName": "sessions_userId_foreign",
+          "localTableName": "sessions",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "users",
+          "deleteRule": "cascade"
+        }
+      },
+      "comment": null
+    },
+    {
       "name": "users",
       "columns": {
         "created_at": {
@@ -643,11 +1075,27 @@
           "enumItems": [],
           "mappedType": "text"
         },
-        "id": {
-          "name": "id",
+        "email_verified": {
+          "name": "email_verified",
           "type": "integer",
           "unsigned": false,
-          "autoincrement": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "false",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
           "primary": true,
           "nullable": false,
           "unique": false,
@@ -657,10 +1105,10 @@
           "default": null,
           "comment": null,
           "enumItems": [],
-          "mappedType": "integer"
+          "mappedType": "text"
         },
-        "name": {
-          "name": "name",
+        "image": {
+          "name": "image",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -674,6 +1122,54 @@
           "comment": null,
           "enumItems": [],
           "mappedType": "text"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "'user'",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
         }
       },
       "indexes": [
@@ -755,7 +1251,7 @@
         },
         "owner_id": {
           "name": "owner_id",
-          "type": "integer",
+          "type": "text",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
@@ -767,7 +1263,7 @@
           "default": null,
           "comment": null,
           "enumItems": [],
-          "mappedType": "integer"
+          "mappedType": "text"
         }
       },
       "indexes": [
@@ -806,6 +1302,122 @@
           "referencedTableName": "users"
         }
       },
+      "comment": null
+    },
+    {
+      "name": "verifications",
+      "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "date"
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "primary",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
       "comment": null
     }
   ],

@@ -22,31 +22,36 @@ export class BookingService {
     private readonly em: EntityManager,
   ) {}
 
-  async create(data: CreateBookingDto) {
-    // 1. Create the instance (using repository.create ensures metadata is correct)
-    const booking = this.bookingRepository.create({
-      bookingDate: new Date(data.bookingDate),
-      user: this.em.getReference(UserEntity, data.user),
-      location: this.em.getReference(LocationEntity, data.location),
-      slot: data.slot ? this.em.getReference(ScheduleEntity, data.slot) : undefined,
-    });
-
-    // 2. Add Many-to-Many collections
-    data.vehicles.forEach(vId => {
-      booking.vehicles.add(this.em.getReference(VehicleEntity, vId));
-    });
-
-    data.services.forEach(sId => {
-      booking.services.add(this.em.getReference(ServiceEntity, sId));
-    });
-
-    // 3. Use the BaseRepository EntityManager to persist and flush
-    // This matches the pattern in your other services
-    this.em.persist(booking);
-    await this.em.flush();
+async create(data: CreateBookingDto) {
+  // 1. Create the instance (using repository.create ensures metadata is correct)
+  const booking = this.bookingRepository.create({
+    bookingDate: new Date(data.bookingDate),
     
-    return booking;
-  }
+    // FIX: Coerce data.user to a string to match the Better Auth UserEntity schema
+    user: this.em.getReference(UserEntity, String(data.user)),
+    
+    // Ensure these match their respective entity primary key types (assuming number here)
+    location: this.em.getReference(LocationEntity, Number(data.location)),
+    slot: data.slot ? this.em.getReference(ScheduleEntity, Number(data.slot)) : undefined,
+  });
+
+  // 2. Add Many-to-Many collections
+  data.vehicles.forEach(vId => {
+    // If your VehicleEntity also shifted to string IDs, change Number(vId) to String(vId)
+    booking.vehicles.add(this.em.getReference(VehicleEntity, Number(vId)));
+  });
+
+  data.services.forEach(sId => {
+    booking.services.add(this.em.getReference(ServiceEntity, Number(sId)));
+  });
+
+  // 3. Use the BaseRepository EntityManager to persist and flush
+  this.em.persist(booking);
+  await this.em.flush();
+  
+  return booking;
+}
+
 
   async findAll() {
     return await this.bookingRepository.findAll({ 

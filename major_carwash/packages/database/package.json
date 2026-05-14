@@ -31,6 +31,7 @@
     "@mikro-orm/decorators": "^7.0.15",
     "@mikro-orm/libsql": "^7.0.15",
     "@mikro-orm/reflection": "^7.0.15",
+    "better-auth": "^1.6.11",
     "dotenv": "^17.4.2",
     "reflect-metadata": "^0.2.2"
   },
