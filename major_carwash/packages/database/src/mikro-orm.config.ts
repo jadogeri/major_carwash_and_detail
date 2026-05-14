@@ -1,3 +1,79 @@
+// // packages/database/src/mikro-orm.config.ts
+// import 'reflect-metadata'; 
+// import * as dotenv from 'dotenv';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+
+// // 1. Try loading from the monorepo workspace ROOT directory first
+// dotenv.config({ path: path.resolve(__dirname, '../../../.env') }); 
+
+// // 2. Fallback to the local package folder if present
+// dotenv.config({ path: path.resolve(__dirname, '../.env') }); 
+
+// // 3. Fallback to the working process location (covers NestJS execution context)
+// dotenv.config();
+
+// import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
+// import { Migrator } from '@mikro-orm/migrations';
+// import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
+// import { UserEntity } from './entities/user.entity.js';
+// import { VehicleEntity } from './entities/vehicle.entity.js';
+// import { BookingEntity } from './entities/booking.entity.js';
+// import { ServiceEntity } from './entities/service.entity.js';
+// import { ScheduleEntity } from './entities/schedule.entity.js';
+// import { LocationEntity } from './entities/location.entity.js';
+// import { VerificationEntity } from './entities/verification.entity.js';
+// import { SessionEntity } from './entities/session.entity.js';
+// import { AccountEntity } from './entities/account.entity.js';
+
+// // Hard-coded for immediate testing
+// const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || "file:./turso.db";
+// const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || "your-turso-auth-token";
+
+// console.log("Using Turso Database URL:", TURSO_DATABASE_URL);
+// console.log("Using Turso Auth Token:", TURSO_AUTH_TOKEN ? "Provided" : "Not Provided");
+
+
+// export default defineConfig({
+
+//   driver: LibSqlDriver,
+//   dbName: TURSO_DATABASE_URL,
+//   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
+  
+//   entities: [
+//     UserEntity, VehicleEntity, BookingEntity, ServiceEntity, ScheduleEntity, 
+//     LocationEntity, AccountEntity, SessionEntity, VerificationEntity   
+//   ], // Using classes directly prevents path discovery errors
+//   metadataProvider: ReflectMetadataProvider,
+  
+//     // 3. Monorepo Discovery Fix
+//     discovery: {
+//         //disableDynamicFileAccess: true, // Prevents CLI from crashing on relative paths
+//         warnWhenNoEntities: true,
+//     },
+
+//     // 4. Extensions
+//     extensions: [Migrator],
+    
+//     // 5. Migrations (Monorepo safe paths)
+//     migrations: {
+//         path: './src/migrations',
+//         pathTs: './src/migrations',
+//         glob: '!(*.d).{js,ts}',
+//         transactional: true,
+//         allOrNothing: true,
+//         snapshot: true,
+//         emit: 'ts',
+//     },
+
+//     // 6. Logging
+//     debug: ['query', 'query-params'],
+// });
+
 // packages/database/src/mikro-orm.config.ts
 import 'reflect-metadata'; 
 import * as dotenv from 'dotenv';
@@ -20,6 +96,8 @@ dotenv.config();
 import { defineConfig, LibSqlDriver } from '@mikro-orm/libsql';
 import { Migrator } from '@mikro-orm/migrations';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
+
+// Import Entities
 import { UserEntity } from './entities/user.entity.js';
 import { VehicleEntity } from './entities/vehicle.entity.js';
 import { BookingEntity } from './entities/booking.entity.js';
@@ -30,6 +108,9 @@ import { VerificationEntity } from './entities/verification.entity.js';
 import { SessionEntity } from './entities/session.entity.js';
 import { AccountEntity } from './entities/account.entity.js';
 
+// Import BaseRepository to serve as the global default mapping
+import { BaseRepository } from './core/repositories/base.repository.js';
+
 // Hard-coded for immediate testing
 const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || "file:./turso.db";
 const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || "your-turso-auth-token";
@@ -37,39 +118,39 @@ const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || "your-turso-auth-token"
 console.log("Using Turso Database URL:", TURSO_DATABASE_URL);
 console.log("Using Turso Auth Token:", TURSO_AUTH_TOKEN ? "Provided" : "Not Provided");
 
-
 export default defineConfig({
-
   driver: LibSqlDriver,
   dbName: TURSO_DATABASE_URL,
   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
   
+  // FIX: Instructs MikroORM to back all entities with your BaseRepository layout automatically
+  entityRepository: () => BaseRepository,
+
   entities: [
     UserEntity, VehicleEntity, BookingEntity, ServiceEntity, ScheduleEntity, 
     LocationEntity, AccountEntity, SessionEntity, VerificationEntity   
   ], // Using classes directly prevents path discovery errors
   metadataProvider: ReflectMetadataProvider,
   
-    // 3. Monorepo Discovery Fix
-    discovery: {
-        //disableDynamicFileAccess: true, // Prevents CLI from crashing on relative paths
-        warnWhenNoEntities: true,
-    },
+  // 3. Monorepo Discovery Fix
+  discovery: {
+    warnWhenNoEntities: true,
+  },
 
-    // 4. Extensions
-    extensions: [Migrator],
+  // 4. Extensions
+  extensions: [Migrator],
     
-    // 5. Migrations (Monorepo safe paths)
-    migrations: {
-        path: './src/migrations',
-        pathTs: './src/migrations',
-        glob: '!(*.d).{js,ts}',
-        transactional: true,
-        allOrNothing: true,
-        snapshot: true,
-        emit: 'ts',
-    },
+  // 5. Migrations (Monorepo safe paths)
+  migrations: {
+    path: './src/migrations',
+    pathTs: './src/migrations',
+    glob: '!(*.d).{js,ts}',
+    transactional: true,
+    allOrNothing: true,
+    snapshot: true,
+    emit: 'ts',
+  },
 
-    // 6. Logging
-    debug: ['query', 'query-params'],
+  // 6. Logging
+  debug: ['query', 'query-params'],
 });
