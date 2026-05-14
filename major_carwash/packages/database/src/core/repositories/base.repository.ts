@@ -61,8 +61,7 @@ import {
   EntityManager 
 } from '@mikro-orm/core';
 
-export abstract class BaseRepository<T extends object> extends EntityRepository<T> {
-  // Use the core EntityManager which is driver-agnostic
+export class BaseRepository<T extends object> extends EntityRepository<T> {
   declare readonly em: EntityManager;
 
   // Helper helper utility to ensure operations always use the active request thread context

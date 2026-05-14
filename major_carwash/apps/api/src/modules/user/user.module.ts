@@ -1,25 +1,23 @@
 // apps/api/src/modules/user/user.module.ts
 import { Module } from '@nestjs/common';
-import { MikroOrmModule, getRepositoryToken } from '@mikro-orm/nestjs';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
-import { UserRepository } from './user.repository';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { getRepositoryToken } from '@mikro-orm/nestjs';
 import { UserEntity } from '@repo/database';
-
+import { UserRepository } from './user.repository.js';
+import { UserService } from './user.service.js';
 
 @Module({
-  imports: [MikroOrmModule.forFeature([UserEntity])],
-  controllers: [UserController],
+  imports: [
+    MikroOrmModule.forFeature([UserEntity]),
+  ],
   providers: [
     UserService,
-    // THIS IS THE CRITICAL FIX:
-    // It tells Nest: "When @InjectRepository(User) is requested, 
-    // use the UserRepository class instead of the default one."
+    // Explicit Custom Provider mapping
     {
       provide: getRepositoryToken(UserEntity),
       useClass: UserRepository,
     },
   ],
-  exports: [UserService],
+  exports: [UserService, getRepositoryToken(UserEntity)],
 })
 export class UserModule {}

@@ -215,6 +215,39 @@
 //   }
 // };
 // packages/database/src/lib/auth.ts
+// import { betterAuth } from "better-auth";
+// import { mikroOrmAdapter } from "better-auth-mikro-orm";
+// import type { MikroORM } from "@mikro-orm/libsql";
+
+// export const initAuth = (orm: MikroORM) => {
+//   try {
+//     return betterAuth({
+//       secret: process.env.BETTER_AUTH_SECRET!,
+      
+//       // Native, secure, and reads the exact same configurations as your repositories
+//       database: mikroOrmAdapter(orm),
+
+//       advanced: {
+//         database: {
+//           generateId: false // Crucial: Prevents Better Auth from overriding MikroORM ID managers
+//         }
+//       },
+//       modelMapping: {
+//         user: "users",
+//         session: "sessions",
+//         account: "accounts",
+//         verification: "verifications"
+//       }
+//     });
+//   } catch (error) {
+//     console.error("=================================================");
+//     console.error("🔴 CRITICAL BETTER AUTH INITIALIZATION ERROR:");
+//     console.error(error);
+//     console.error("=================================================");
+//     throw error;
+//   }
+// };
+// packages/database/src/lib/auth.ts
 import { betterAuth } from "better-auth";
 import { mikroOrmAdapter } from "better-auth-mikro-orm";
 import type { MikroORM } from "@mikro-orm/libsql";
@@ -224,7 +257,10 @@ export const initAuth = (orm: MikroORM) => {
     return betterAuth({
       secret: process.env.BETTER_AUTH_SECRET!,
       
-      // Native, secure, and reads the exact same configurations as your repositories
+      // FIX THE WARNING: Provide a fallback URL for development contexts
+      baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+      
+      // Native, secure, and maintained directly by the community
       database: mikroOrmAdapter(orm),
 
       advanced: {
