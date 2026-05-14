@@ -1,7 +1,6 @@
 // src/modules/user/user.repository.ts
 import { Injectable } from '@nestjs/common';
-import { ScheduleEntity } from '@repo/database'
-import { BaseRepository } from '../../common/repositories/base.repository.js'; // Adjust path to your base repository'
+import { BaseRepository, ScheduleEntity } from '@repo/database'
 import { EntityManager } from '@mikro-orm/core';
 
 @Injectable()

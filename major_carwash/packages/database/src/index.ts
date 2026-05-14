@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+export * from './core/repositories/base.repository.js';
 export * from './entities/user.entity.js';
 export * from './entities/vehicle.entity.js';
 export * from './entities/booking.entity.js';
