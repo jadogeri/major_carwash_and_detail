@@ -20,6 +20,9 @@ import { BookingEntity } from './entities/booking.entity.js';
 import { ServiceEntity } from './entities/service.entity.js';
 import { ScheduleEntity } from './entities/schedule.entity.js';
 import { LocationEntity } from './entities/location.entity.js';
+import { VerificationEntity } from './entities/verification.entity.js';
+import { SessionEntity } from './entities/session.entity.js';
+import { AccountEntity } from './entities/account.entity.js';
 
 // Hard-coded for immediate testing
 const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || "file:./turso.db";
@@ -35,7 +38,10 @@ export default defineConfig({
   dbName: TURSO_DATABASE_URL,
   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
   
-  entities: [UserEntity, VehicleEntity, BookingEntity, ServiceEntity, ScheduleEntity, LocationEntity], // Using classes directly prevents path discovery errors
+  entities: [
+    UserEntity, VehicleEntity, BookingEntity, ServiceEntity, ScheduleEntity, 
+    LocationEntity, AccountEntity, SessionEntity, VerificationEntity   
+  ], // Using classes directly prevents path discovery errors
   metadataProvider: ReflectMetadataProvider,
   
     // 3. Monorepo Discovery Fix

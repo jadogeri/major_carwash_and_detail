@@ -1,30 +1,43 @@
 // packages/database/src/entities/user.entity.ts
-import { Collection } from '@mikro-orm/core';
-import { Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/decorators/legacy';
+import {Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/decorators/legacy';
 
-// 1. Keep 'import type' to avoid circular dependency issues
+// Keep 'import type' to avoid circular dependency issues
 import type { BookingEntity as Booking } from './booking.entity.js';
 import type { VehicleEntity as Vehicle } from './vehicle.entity.js';
+import { Collection } from '@mikro-orm/libsql';
 
 @Entity({ tableName: 'users' }) 
 export class UserEntity {
-  @PrimaryKey({type: 'number'})
-  id: number;
+  // Better Auth requires string IDs (usually UUID or ulid)
+  @PrimaryKey({ type: 'string' })
+  id!: string;
 
   @Property({ unique: true, type: 'string' })
-  email: string;
+  email!: string;
 
-  @Property({ nullable: true, type: 'string' })
-  name?: string;
+  @Property({ type: 'string' })
+  name!: string;
+
+  @Property({ type: 'boolean', default: false })
+  emailVerified!: boolean;
+
+  @Property({ type: 'string', nullable: true })
+  image?: string;
 
   @Property({ type: 'date' })
   createdAt: Date = new Date();
 
-  // FIX: Change 'Vehicle' to 'VehicleEntity' to match the discovered class name
+  @Property({ type: 'date' })
+  updatedAt: Date = new Date();
+
+  // Better Auth role management field
+  @Property({ type: 'string', default: 'user' })
+  role!: string;
+
+  // Existing Relations
   @OneToMany(() => 'VehicleEntity' as any, (vehicle: Vehicle) => vehicle.owner)
   vehicles = new Collection<Vehicle>(this);
 
-  // FIX: Change 'Booking' to 'BookingEntity'
   @OneToMany(() => 'BookingEntity' as any, (booking: Booking) => booking.user)
   bookings = new Collection<Booking>(this);
 }
