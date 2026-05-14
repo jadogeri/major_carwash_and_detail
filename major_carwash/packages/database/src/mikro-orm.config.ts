@@ -124,7 +124,7 @@ export default defineConfig({
   password: TURSO_AUTH_TOKEN, // Standardized for Turso in v7
   
   // FIX: Instructs MikroORM to back all entities with your BaseRepository layout automatically
-  entityRepository: () => BaseRepository,
+  //entityRepository: () => BaseRepository,
 
   entities: [
     UserEntity, VehicleEntity, BookingEntity, ServiceEntity, ScheduleEntity, 
