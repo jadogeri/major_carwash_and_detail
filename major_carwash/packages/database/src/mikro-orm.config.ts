@@ -44,6 +44,8 @@ export default defineConfig({
   discovery: {
     warnWhenNoEntities: true,
     onMetadata: (meta) => {
+      // 🛑 TEMPORARY DEBUG LOG: Watch your terminal when the app starts
+      console.log("👉 Discovered Entity Class Name:", meta.className);
       if (meta.className === 'User') meta.name = 'User';
       if (meta.className === 'Session') meta.name = 'Session';
       if (meta.className === 'Account') meta.name = 'Account';
