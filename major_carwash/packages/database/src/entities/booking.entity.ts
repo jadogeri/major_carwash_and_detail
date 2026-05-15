@@ -4,7 +4,7 @@ import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany } from "@mikro-orm/
 import type { Ref } from '@mikro-orm/core'; // Import from core instead
 
 // 1. Keep 'import type' to prevent circular dependencies
-import type { UserEntity as User } from './user.entity.js';
+import type { User } from './user.entity.js';
 import type { VehicleEntity as Vehicle } from './vehicle.entity.js';
 import type { LocationEntity as Location } from './location.entity.js';
 import type { ServiceEntity as Service } from './service.entity.js';
@@ -19,7 +19,7 @@ export class BookingEntity {
   bookingDate: Date;
 
   // FIX: Change 'User' to 'UserEntity'
-  @ManyToOne(() => 'UserEntity' as any, { fieldName: 'userId', deleteRule: 'cascade' })
+  @ManyToOne(() => 'User' as any, { fieldName: 'userId', deleteRule: 'cascade' })
   user!: User | Ref<User> | any; 
 
   // FIX: Change 'Location' to 'LocationEntity'

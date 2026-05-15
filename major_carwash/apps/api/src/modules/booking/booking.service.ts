@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { 
   BookingEntity, 
-  UserEntity, 
+  User, 
   LocationEntity, 
   ScheduleEntity, 
   VehicleEntity, 
@@ -28,7 +28,7 @@ async create(data: CreateBookingDto) {
     bookingDate: new Date(data.bookingDate),
     
     // FIX: Coerce data.user to a string to match the Better Auth UserEntity schema
-    user: this.em.getReference(UserEntity, String(data.user)),
+    user: this.em.getReference(User, String(data.user)),
     
     // Ensure these match their respective entity primary key types (assuming number here)
     location: this.em.getReference(LocationEntity, Number(data.location)),

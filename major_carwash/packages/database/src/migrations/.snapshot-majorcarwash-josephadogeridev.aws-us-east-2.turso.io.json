@@ -196,8 +196,8 @@
           "enumItems": [],
           "mappedType": "date"
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -216,11 +216,11 @@
       "indexes": [
         {
           "columnNames": [
-            "userId"
+            "user_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "accounts_userId_index",
+          "keyName": "accounts_user_id_index",
           "primary": false,
           "unique": false
         },
@@ -237,11 +237,11 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "accounts_userId_foreign": {
+        "accounts_user_id_foreign": {
           "columnNames": [
-            "userId"
+            "user_id"
           ],
-          "constraintName": "accounts_userId_foreign",
+          "constraintName": "accounts_user_id_foreign",
           "localTableName": "accounts",
           "referencedColumnNames": [
             "id"
@@ -959,13 +959,13 @@
           "enumItems": [],
           "mappedType": "date"
         },
-        "userId": {
-          "name": "userId",
+        "user_agent": {
+          "name": "user_agent",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "unique": false,
           "length": null,
           "precision": null,
@@ -975,13 +975,13 @@
           "enumItems": [],
           "mappedType": "text"
         },
-        "user_agent": {
-          "name": "user_agent",
+        "user_id": {
+          "name": "user_id",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": true,
+          "nullable": false,
           "unique": false,
           "length": null,
           "precision": null,
@@ -1015,22 +1015,22 @@
         },
         {
           "columnNames": [
-            "userId"
+            "user_id"
           ],
           "composite": false,
           "constraint": false,
-          "keyName": "sessions_userId_index",
+          "keyName": "sessions_user_id_index",
           "primary": false,
           "unique": false
         }
       ],
       "checks": [],
       "foreignKeys": {
-        "sessions_userId_foreign": {
+        "sessions_user_id_foreign": {
           "columnNames": [
-            "userId"
+            "user_id"
           ],
-          "constraintName": "sessions_userId_foreign",
+          "constraintName": "sessions_user_id_foreign",
           "localTableName": "sessions",
           "referencedColumnNames": [
             "id"
@@ -1044,6 +1044,38 @@
     {
       "name": "users",
       "columns": {
+        "ban_reason": {
+          "name": "ban_reason",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "banned": {
+          "name": "banned",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "false",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
         "created_at": {
           "name": "created_at",
           "type": "date",
@@ -1155,6 +1187,22 @@
           "comment": null,
           "enumItems": [],
           "mappedType": "text"
+        },
+        "two_factor_enabled": {
+          "name": "two_factor_enabled",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "false",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
         },
         "updated_at": {
           "name": "updated_at",

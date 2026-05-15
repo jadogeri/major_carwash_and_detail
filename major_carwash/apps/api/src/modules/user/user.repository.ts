@@ -1,11 +1,11 @@
 // src/modules/user/user.repository.ts
 import { Injectable } from '@nestjs/common';
-import { BaseRepository, UserEntity } from '@repo/database'
+import { BaseRepository, User } from '@repo/database'
 import { EntityManager } from '@mikro-orm/core';
 
 @Injectable()
-export class UserRepository extends BaseRepository<UserEntity> {
+export class UserRepository extends BaseRepository<User> {
     constructor(em: EntityManager) {
-        super(em, UserEntity);
+        super(em, User);
     }    
 }

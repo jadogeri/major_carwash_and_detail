@@ -1,5 +1,5 @@
 // src/modules/user/dto/create-user.dto.ts
-import { UserEntity } from '@repo/database';
+import { User } from '@repo/database';
 import type { RequiredEntityData } from '@mikro-orm/core';
 import { IsEmail, IsString, IsOptional } from 'class-validator';
 
@@ -18,5 +18,5 @@ export class CreateUserDto {
 }
 
 // 2. Enforce structural integrity separately via a compile-time type check if desired
-type ValidatedPayload = Omit<RequiredEntityData<UserEntity>, 'id' | 'createdAt' | 'updatedAt' | 'emailVerified' | 'role'>;
+type ValidatedPayload = Omit<RequiredEntityData<User>, 'id' | 'createdAt' | 'updatedAt' | 'emailVerified' | 'role'>;
 

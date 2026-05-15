@@ -2,22 +2,22 @@
 import { Module } from '@nestjs/common';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { getRepositoryToken } from '@mikro-orm/nestjs';
-import { UserEntity } from '@repo/database';
+import { User } from '@repo/database';
 import { UserRepository } from './user.repository.js';
 import { UserService } from './user.service.js';
 
 @Module({
   imports: [
-    MikroOrmModule.forFeature([UserEntity]),
+    MikroOrmModule.forFeature([User]),
   ],
   providers: [
     UserService,
     // Explicit Custom Provider mapping
     {
-      provide: getRepositoryToken(UserEntity),
+      provide: getRepositoryToken(User),
       useClass: UserRepository,
     },
   ],
-  exports: [UserService, getRepositoryToken(UserEntity)],
+  exports: [UserService, getRepositoryToken(User)],
 })
 export class UserModule {}

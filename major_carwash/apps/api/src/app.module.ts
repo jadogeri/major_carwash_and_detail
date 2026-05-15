@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
+  import { UserModule } from './modules/user/user.module';
 import { BookingModule } from './modules/booking/booking.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { LocationModule } from './modules/location/location.module';
@@ -24,7 +22,7 @@ import { AuthModule } from './modules/auth/auth.module';
     ServiceModule, 
     ScheduleModule, AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

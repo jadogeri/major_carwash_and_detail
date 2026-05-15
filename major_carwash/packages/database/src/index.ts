@@ -9,4 +9,4 @@ export * from './entities/service.entity.js';
 export * from './entities/schedule.entity.js';// ... rest of your exports
 export { default as microOrmConfig } from './mikro-orm.config.js';
 
-export { initAuth } from './lib/auth.js';
+export { initAuth, type BetterAuthServerInstance } from './lib/auth.js';
