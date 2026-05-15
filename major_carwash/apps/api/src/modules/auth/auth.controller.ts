@@ -12,6 +12,27 @@ export class AuthController {
     private readonly orm: MikroORM 
   ) {}
 
+    /**
+   * 2. EXPOSED INFRASTRUCTURE ACTION: Programmatically interacting 
+   * with your auth engine metrics inside a custom endpoint.
+   */
+@Get('admin/metrics')
+async getAuthMetrics(@Req() req: Request) {
+  const activeSessions = await this.authService.auth.api.listSessions({
+    // Forwarding the active request headers guarantees the calling admin's session is validated
+    headers: req.headers as HeadersInit, 
+    query: { 
+      limit: 10 
+    }
+  });
+  
+  return {
+    status: 'healthy',
+    activeSessions,
+  };
+}
+
+
   // ==========================================
   // EXPLICIT ROUTES (FULLY IMPLEMENTED)
   // ==========================================
@@ -51,6 +72,9 @@ export class AuthController {
   async handleAuthFallback(@Req() req: ExpressRequest, @Res() res: ExpressResponse) {
     return this.executeProxy(req, res);
   }
+  
+ 
+
 
   // ==========================================
   // SHARED CORE PROXY ENGINE
